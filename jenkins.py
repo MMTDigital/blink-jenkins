@@ -19,11 +19,11 @@ JOBS_TO_IGNORE_ANIME = [
 ]
 
 # Ignore these jobs completely -- for jobs that are known to be broken
-JOBS_TO_IGNORE = [
-    'ActiveTeachDemo',
-    'ActiveTeachDemoRunAllSelenium',
-    'ActvieTeachUsingTags'
-]
+# JOBS_TO_IGNORE = [
+#     'ActiveTeachDemo',
+#     'ActiveTeachDemoRunAllSelenium',
+#     'ActvieTeachUsingTags'
+# ]
 
 
 class Color(object):
@@ -89,7 +89,7 @@ COLORS = {
 def poll_loop(blink, args):
     try:
         while True:
-            poll(blink, args.host, username=args.user, password=args.password)
+            poll(blink, args.host, username=args.user, password=args.password, ignore=args.ignore.split(","))
             time.sleep(INTERVAL)
     except KeyboardInterrupt:
         blink.set_color(COLORS['off'])
@@ -107,10 +107,10 @@ def list_match(job_name, job_list):
     return False
 
 
-def choose_color_for_job(job):
+def choose_color_for_job(job, ignore):
     name = job['name']
 
-    if list_match(name, JOBS_TO_IGNORE):
+    if ignore and list_match(name, ignore):
         return None
 
     c = job['color']
@@ -123,7 +123,7 @@ def choose_color_for_job(job):
     return c
 
 
-def poll(blink, host, username=None, password=None):
+def poll(blink, host, username=None, password=None, ignore=None):
     # TODO: os is the wrong module for this
     uri = os.path.join(host, PYTHON_API_PATH)
     auth = (username, password) if (username or password) else None
@@ -145,7 +145,7 @@ def poll(blink, host, username=None, password=None):
     # Assume everything is ok
     color = COLORS['blue']
     for job in jobs:
-        c = choose_color_for_job(job)
+        c = choose_color_for_job(job, ignore)
         if c and c > color:
             color = c
             print job['name']
@@ -161,6 +161,8 @@ def create_arg_parser():
         '-u', '--user', action='store')
     parser.add_argument(
         '-p', '--password', action='store')
+    parser.add_argument(
+        '-i', '--ignore', action='store')
     return parser
 
 if __name__ == '__main__':
