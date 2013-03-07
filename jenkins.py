@@ -73,8 +73,8 @@ class Blink(object):
 
 COLORS = {
     'off': Color(0, 0, 0),
-    'blue': Color(0, 0, 255),
-    'blue_anime': Color(0, 0, 255, animated=True),
+    'blue': Color(0, 255, 0),
+    'blue_anime': Color(0, 255, 0, animated=True),
     'aborted': Color(200, 200, 200),
     'aborted_anime': Color(200, 200, 200, animated=True),
     'grey': Color(200, 200, 200),
