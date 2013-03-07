@@ -20,8 +20,9 @@ JOBS_TO_IGNORE_ANIME = [
 
 # Ignore these jobs completely -- for jobs that are known to be broken
 JOBS_TO_IGNORE = [
-    'rentmybike',
-    'run_balanced_ruby_suite'
+    'ActiveTeachDemo',
+    'ActiveTeachDemoRunAllSelenium',
+    'ActvieTeachUsingTags'
 ]
 
 
