@@ -11,3 +11,6 @@ Simply run the python file, passing it the `--host` parameter to tell it where y
 Example execution for Windows machines (useful as part of a batch script)
 
     python jenkins.py --host http://my.jenkins.server.com/ --ignore TestBuild1,BrokenBuild
+
+![Build Failed!](https://raw.github.com/MMTDigital/blink-jenkins/gh-pages/img/build-failed.jpg)
+![Build Success!](https://raw.github.com/MMTDigital/blink-jenkins/gh-pages/img/build-success.jpg)
