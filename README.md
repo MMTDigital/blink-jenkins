@@ -12,5 +12,13 @@ Example execution for Windows machines (useful as part of a batch script)
 
     python jenkins.py --host http://my.jenkins.server.com/ --ignore TestBuild1,BrokenBuild
 
+Command line options:
+
+    -h      | --host     | The URL of the Jenkins server (root view or individual job page).
+    -u      | --user     | The HTTP Basic Authentication username.
+    -p      | --password | The HTTP Basic Authentication password.
+    -i      | --ignore   | A comma-separated list of the job names to ignore the status from.
+    -device | --deviceid | The Id of the Blink(1) to activate. (Zero-indexed list of devices, default is 0).
+
 ![Build Failed!](https://raw.github.com/MMTDigital/blink-jenkins/gh-pages/img/build-failed.jpg)
 ![Build Success!](https://raw.github.com/MMTDigital/blink-jenkins/gh-pages/img/build-success.jpg)
