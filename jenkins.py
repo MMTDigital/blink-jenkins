@@ -44,7 +44,8 @@ class Color(object):
 
 
 class Blink(object):
-    def __init__(self):
+    def __init__(self, deviceid=0):
+        self.deviceid = deviceid
         self.color = COLORS['off']
         self.proc = None
 
@@ -68,6 +69,7 @@ class Blink(object):
         args.append('%r' % color)
         if color.animated:
             args.extend(['--blink', str(255), '-t', '1000'])
+        args.append(['-d', str(int(self.deviceid or 0))])
         print args
         self.proc = subprocess.Popen(args)
 
@@ -163,11 +165,13 @@ def create_arg_parser():
         '-p', '--password', action='store')
     parser.add_argument(
         '-i', '--ignore', action='store')
+    parser.add_argument(
+        '-device', '--deviceid', action='store')
     return parser
 
 if __name__ == '__main__':
     arg_parser = create_arg_parser()
     cmd_args = arg_parser.parse_args()
 
-    blinker = Blink()
+    blinker = Blink(cmd_args.deviceid)
     poll_loop(blinker, cmd_args)
